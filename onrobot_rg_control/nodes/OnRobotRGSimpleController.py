@@ -9,7 +9,7 @@ def genCommand(char, command):
 
     if gtype == 'rg2':
         max_force = 400
-        max_width = 1100
+        max_width = 1000
     elif gtype == 'rg6':
         max_force = 1200
         max_width = 1600
@@ -18,28 +18,32 @@ def genCommand(char, command):
             rospy.get_name() +
             ": Select the gripper type from rg2 or rg6.")
 
-    if char == 'c':
-        command.rGFR = 400
-        command.rGWD = 0
-        command.rCTR = 16
-    elif char == 'o':
-        command.rGFR = 400
+    if char == 'a':
+        command.rGFR = 200
         command.rGWD = max_width
-        command.rCTR = 16
+        command.rCTR = 1
+    if char == 'c':
+    #    command.rGFR = 400
+        command.rGWD = 0
+        command.rCTR = 1
+    elif char == 'o':
+    #    command.rGFR = 400
+        command.rGWD = max_width
+        command.rCTR = 1
     elif char == 'i':
         command.rGFR += 25
         command.rGFR = min(max_force, command.rGFR)
-        command.rCTR = 16
+        command.rCTR = 1
     elif char == 'd':
         command.rGFR -= 25
         command.rGFR = max(0, command.rGFR)
-        command.rCTR = 16
+        command.rCTR = 1
     else:
         # If the command entered is a int, assign this value to rGWD
         try:
-            command.rGFR = 400
+        #    command.rGFR = 400
             command.rGWD = min(max_width, int(char))
-            command.rCTR = 16
+            command.rCTR = 1
         except ValueError:
             pass
 
@@ -57,6 +61,7 @@ def askForCommand(command):
     rospy.loginfo(currentCommand)
 
     strAskForCommand = '-----\nAvailable commands\n\n'
+    strAskForCommand += 'a: Activate\n'
     strAskForCommand += 'c: Close\n'
     strAskForCommand += 'o: Open\n'
     strAskForCommand += '(0 - max width): Go to that position\n'

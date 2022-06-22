@@ -66,25 +66,31 @@ class communication:
         if message != []:
             with self.lock:
                 self.client.write_registers(
-                    address=0, values=message, unit=65)
+                    address=2, values=message, unit=65)
 
     def getStatus(self):
         """Sends a request to read, wait for the response
            and returns the Gripper status.
            The method gets by specifying register address as an argument.
         """
-        response = [0] * 18
+        response1 = [0] * 2
+        response2 = [0] * 26
         if self.dummy:
             rospy.loginfo(
                 rospy.get_name() +
                 ": " +
                 sys._getframe().f_code.co_name)
-            return response
+            return response1 + response2
 
-        # Get status from the device (address 258 ~ 275)
+        # Get status from the device (address 5 and 6)
         with self.lock:
-            response = self.client.read_holding_registers(
-                address=258, count=18, unit=65).registers
+            response1 = self.client.read_holding_registers(
+                address=5, count=2, unit=65).registers
+
+        # Get status from the device (address 257 ~ 282)
+        with self.lock:
+            response2 = self.client.read_holding_registers(
+                address=257, count=26, unit=65).registers
 
         # Output the result
-        return response
+        return response1 + response2

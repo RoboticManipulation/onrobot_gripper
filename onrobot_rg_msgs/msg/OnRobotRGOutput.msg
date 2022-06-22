@@ -27,3 +27,5 @@ uint16 rGWD
 #          Same as grip, but width is calculated with the set fingertip offset.
 
 uint8 rCTR
+
+int32 Fz_r
