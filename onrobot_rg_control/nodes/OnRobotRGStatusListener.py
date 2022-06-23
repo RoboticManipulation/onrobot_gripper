@@ -74,8 +74,9 @@ def statusInterpreter(status):
     output += 'StaFing_r = ' + str(status.StaFing_r) + ': Current Status of the right Finger, should be 0\n'
     output += 'StaProx_l = ' + str(status.StaProx_l) + ': Current Status of the left proximity sensor, should be 0\n'
     output += 'StaProx_r = ' + str(status.StaProx_r) + ': Current Status of the right proximity sensor, should be 0\n'
-    output += 'Busy = ' + str(status.Busy) + ': Current gripper status. 0 = idle, accepting commands / 1 = busy, not accepting new commands\n\n'
-    output += 'GripDet = ' + str(status.GripDet) + ': A 1 indicates that there currently is an external or internal grip being detected\n\n'
+    output += 'Busy = ' + str(status.Busy) + ': Current gripper status. 0 = idle, accepting commands / 1 = busy, not accepting new commands\n'
+    output += 'GripDet = ' + str(status.GripDet) + ': A 1 indicates that there currently is an external or internal grip being detected\n'
+    output += 'inZero = ' + str(status.inZero) + ': If the value is 1, all force and torque values will be set to 0\n\n'
 
     output += 'ProxOff_l = ' + str(status.ProxOff_l) + ': Set proximity offset: ' + str(status.ProxOff_l / 10.0) + "mm \n"
     output += 'ProxOff_r = ' + str(status.ProxOff_r) + ': Set proximity offset: ' + str(status.ProxOff_r / 10.0) + "mm \n\n"

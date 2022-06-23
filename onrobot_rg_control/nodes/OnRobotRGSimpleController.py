@@ -22,6 +22,7 @@ def genCommand(char, command):
         command.rGFR = 200
         command.rGWD = max_width
         command.rCTR = 1
+        command.outZero = 1
     if char == 'c':
     #    command.rGFR = 400
         command.rGWD = 0
@@ -38,6 +39,12 @@ def genCommand(char, command):
         command.rGFR -= 25
         command.rGFR = max(0, command.rGFR)
         command.rCTR = 1
+    elif char == 's':
+        command.rCTR = 0
+    elif char == 'z':
+        command.outZero = 1
+    elif char == 'uz':
+        command.outZero = 0
     else:
         # If the command entered is a int, assign this value to rGWD
         try:
@@ -57,6 +64,7 @@ def askForCommand(command):
     currentCommand += ' rGFR = ' + str(command.rGFR)
     currentCommand += ', rGWD = ' + str(command.rGWD)
     currentCommand += ', rCTR = ' + str(command.rCTR)
+    currentCommand += ', outZero = ' + str(command.outZero)
 
     rospy.loginfo(currentCommand)
 
@@ -64,9 +72,12 @@ def askForCommand(command):
     strAskForCommand += 'a: Activate\n'
     strAskForCommand += 'c: Close\n'
     strAskForCommand += 'o: Open\n'
+    strAskForCommand += 's: STOP current motion\n'
     strAskForCommand += '(0 - max width): Go to that position\n'
     strAskForCommand += 'i: Increase force\n'
     strAskForCommand += 'd: Decrease force\n'
+    strAskForCommand += 'z: sets the outZero bit to 1, so all force and torque values are set to 0\n'
+    strAskForCommand += 'uz: sets the outZero bit to 0, to undo the force and torque bias\n'
 
     strAskForCommand += '-->'
 

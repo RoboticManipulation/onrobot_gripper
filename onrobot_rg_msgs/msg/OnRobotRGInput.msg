@@ -77,3 +77,6 @@ int32 Prox_r
 # Actual gripper width without any offset in 1/10 millimeters
 int32 GripWidth
 
+# Current state of the Bias, that sets force and torque to zero if set to 1
+int8 inZero
+

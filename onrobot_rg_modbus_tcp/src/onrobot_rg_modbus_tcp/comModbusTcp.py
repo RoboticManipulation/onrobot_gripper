@@ -62,11 +62,17 @@ class communication:
                 sys._getframe().f_code.co_name)
             return
 
-        # Send a command to the device (address 0 ~ 2)
+        # Send a command to the device (address 0, 2 ~ 4)
         if message != []:
             with self.lock:
-                self.client.write_registers(
-                    address=2, values=message, unit=65)
+                self.client.write_register(
+                    address=0, value=message[0], unit=65)
+                self.client.write_register(
+                    address=2, value=message[1], unit=65)
+                self.client.write_register(
+                    address=3, value=message[2], unit=65)
+                self.client.write_register(
+                    address=4, value=message[3], unit=65)
 
     def getStatus(self):
         """Sends a request to read, wait for the response
@@ -75,22 +81,28 @@ class communication:
         """
         response1 = [0] * 2
         response2 = [0] * 26
+        response3 = [0] * 1
         if self.dummy:
+
             rospy.loginfo(
                 rospy.get_name() +
                 ": " +
                 sys._getframe().f_code.co_name)
-            return response1 + response2
+            return response1 + response2 + response3
 
-        # Get status from the device (address 5 and 6)
         with self.lock:
+            # Get status from the device (address 5 and 6)
             response1 = self.client.read_holding_registers(
                 address=5, count=2, unit=65).registers
 
-        # Get status from the device (address 257 ~ 282)
-        with self.lock:
+
+            # Get status from the device (address 257 ~ 282)
             response2 = self.client.read_holding_registers(
                 address=257, count=26, unit=65).registers
 
+            # Get status from the device (address 0)
+            response3 = self.client.read_holding_registers(
+                address=0, count=1, unit=65).registers
+
         # Output the result
-        return response1 + response2
+        return response1 + response2 + response3

@@ -66,6 +66,7 @@ class onrobotbaseRG:
         self.message = []
 
         # Build the command with each output variable
+        self.message.append(command.outZero)
         self.message.append(command.rGFR)
         self.message.append(command.rGWD)
         self.message.append(command.rCTR)
@@ -126,6 +127,7 @@ class onrobotbaseRG:
         message.GripWidth = convertTwoComplement(status[25])
         message.Busy = status[26]
         message.GripDet = status[27]
+        message.inZero = status[28]
 
        
         return message

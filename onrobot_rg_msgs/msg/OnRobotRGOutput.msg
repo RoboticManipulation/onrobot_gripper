@@ -23,9 +23,12 @@ uint16 rGWD
 #          if the busy flag is set in the status field.
 # 0x0008 - stop
 #          Stop the current motion.
-# 0x0010 - grip_w_offset
-#          Same as grip, but width is calculated with the set fingertip offset.
+
 
 uint8 rCTR
 
-int32 Fz_r
+# outZero : Zero the force and torque values to cancel any offset.
+# 0x0000 - un-zero: use the unchanged values
+# 0x0001 - zero: set all values to 0
+
+uint16 outZero
