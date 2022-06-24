@@ -70,11 +70,17 @@ class onrobotbaseRG:
         self.message.append(command.rGFR)
         self.message.append(command.rGWD)
         self.message.append(command.rCTR)
+        #self.message.append(command.outProxOff_l)
+        #self.message.append(command.outProxOff_r)
 
     def sendCommand(self):
         """Sends the command to the Gripper."""
 
         self.client.sendCommand(self.message)
+
+    def setProximityOffset(self, ProxOffsets):
+
+        self.client.setProximityOffset(ProxOffsets)
 
     def getStatus(self):
         """Requests the status from the gripper and

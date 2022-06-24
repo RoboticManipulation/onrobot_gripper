@@ -32,3 +32,6 @@ uint8 rCTR
 # 0x0001 - zero: set all values to 0
 
 uint16 outZero
+
+#uint16 outProxOff_r
+#uint16 outProxOff_l

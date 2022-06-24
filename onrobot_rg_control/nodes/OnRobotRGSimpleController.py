@@ -48,6 +48,17 @@ def genCommand(char, command):
                 command.rCTR = 1
             except ValueError:
                 pass
+        #elif char[0] == 'l':
+        #    try:
+        #        command.outProxOff_l = max(0, min(max_width, int(char[1:])))
+        #    except ValueError:
+        #        pass
+
+        #elif char[0] == 'r':
+        #    try:
+        #        command.outProxOff_r = max(0, min(max_width, int(char[1:])))
+        #    except ValueError:
+        #        pass
         else:
             # If the command entered is a int, assign this value to rGWD
             try:
@@ -80,7 +91,9 @@ def askForCommand(command):
     strAskForCommand += 'd: Decrease force\n'
     strAskForCommand += 'z: sets the outZero bit to 1, so all force and torque values are set to 0\n'
     strAskForCommand += 'uz: sets the outZero bit to 0, to undo the force and torque bias\n'
-    strAskForCommand += 'f0 to f400: Set the force value between 0N and 40N (very low values might result in the gripper not moving)\n'
+    strAskForCommand += 'f0 to f400: Set the force value between 0N and 40N in 1/10N steps(very low values might result in the gripper not moving)\n'
+    strAskForCommand += 'l0 to l1000: Set the offset for the left proximity sensor to a value between 0mm and 100mm in 1/10mm steps\n'
+    strAskForCommand += 'r0 to r1000: Set the offset for the left proximity sensor to a value between 0mm and 100mm in 1/10mm steps\n'
 
     strAskForCommand += '-->'
 
@@ -103,5 +116,5 @@ def publisher():
 
 
 if __name__ == '__main__':
-    gtype = rospy.get_param('/onrobot/gripper', 'rg6')
+    gtype = rospy.get_param('/onrobot/gripper', 'rg2')
     publisher()

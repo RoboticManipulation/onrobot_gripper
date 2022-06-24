@@ -24,6 +24,12 @@ def mainLoop():
                      OnRobotRGOutput,
                      gripper.refreshCommand)
 
+    # Set the Proximit Offsets
+    ProxOffsets = []
+    ProxOffsets.append(230)
+    ProxOffsets.append(170)
+    gripper.setProximityOffset(ProxOffsets)
+
     # We loop
     prev_msg = []
     while not rospy.is_shutdown():

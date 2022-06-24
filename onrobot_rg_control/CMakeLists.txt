@@ -16,4 +16,4 @@ catkin_package(
 
 catkin_install_python(
     PROGRAMS nodes/OnRobotRGSimpleController.py nodes/OnRobotRGStatusListener.py
-    nodes/OnRobotRGTcpNode.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+    nodes/OnRobotRGTcpNode.py nodes/TestNode.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})

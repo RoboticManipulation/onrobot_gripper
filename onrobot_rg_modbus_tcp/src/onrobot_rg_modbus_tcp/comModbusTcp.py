@@ -51,6 +51,14 @@ class communication:
 
         self.client.close()
 
+    def setProximityOffset(self, ProxOffsets):
+
+        with self.lock:
+                self.client.write_register(
+                    address=5, value=ProxOffsets[0], unit=65)
+                self.client.write_register(
+                    address=6, value=ProxOffsets[1], unit=65)
+
     def sendCommand(self, message):
         """Sends a command to the Gripper.
            The method takes a list of uint8 as an argument.
@@ -73,6 +81,10 @@ class communication:
                     address=3, value=message[2], unit=65)
                 self.client.write_register(
                     address=4, value=message[3], unit=65)
+                #self.client.write_register(
+                #    address=5, value=message[4], unit=65)
+                #self.client.write_register(
+                #    address=6, value=message[5], unit=65)
 
     def getStatus(self):
         """Sends a request to read, wait for the response
