@@ -7,6 +7,7 @@ ROS driver for OnRobot GR2-FT Gripper. The [original driver](https://github.com/
 
 ## Installation
 ```
+pip install pymodbus
 git clone git@github.com:RoboticManipulation/onrobot_gripper.git catkin_ws/src; cd catkin_ws
 sudo rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro noetic -y --os=ubuntu:focal -y
 catkin build -DPYTHON_EXECUTABLE=/usr/bin/python3
