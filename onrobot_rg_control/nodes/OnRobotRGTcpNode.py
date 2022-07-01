@@ -37,14 +37,14 @@ def mainLoop():
         status = gripper.getStatus()
         pub.publish(status)
 
-        rospy.sleep(0.05)
+        rospy.sleep(0.0005)
         # Send the most recent command
         if not int(format(status.gSTA, '016b')[-1]):  # not busy
             if not prev_msg == gripper.message:       # find new message
                 rospy.loginfo(rospy.get_name()+": Sending message.")
                 gripper.sendCommand()
         prev_msg = gripper.message
-        rospy.sleep(0.05)
+        rospy.sleep(0.0005)
 
 
 if __name__ == '__main__':
